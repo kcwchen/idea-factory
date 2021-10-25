@@ -3,6 +3,7 @@
     <div class="card-body">
       <h3><%= @idea.title %></h3>
       <p class="card-text"><%= @idea.description %></p>
+      <%= link_to "Delete", idea_path(@idea.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
     </div>
   </div>
 </div>

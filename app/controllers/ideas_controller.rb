@@ -22,7 +22,9 @@ class IdeasController < ApplicationController
   end
 
   def destroy
-
+    @idea = Idea.find params[:id]
+    @idea.destroy
+    redirect_to ideas_path
   end
 
   def edit
