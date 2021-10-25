@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="card border-0">
+  <div class="card border-right-0 border-left-0 border-top-0">
     <div class="card-body">
       <h1><%= @idea.title %></h1>
       <p class="card-text">Created by <%= @idea.user.full_name %></p>
@@ -10,7 +10,7 @@
       <% end %>
     </div>
   </div>
-  <div class="card border-right-0 border-left-0 border-bottom-0">
+  <div class="card border-0">
     <div class="card-body">
       <% @reviews.each do |review| %>
         <p class="card-text">
@@ -18,9 +18,11 @@
           <br>
           <small>
             Reviewed <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.first_name %>
-            &#183;
-            <%= link_to "Delete", [@idea, review], method: :delete, data: { confirm: "Are you sure?" } %>  
           </small>
+          <% if can?(:crud, review) %>
+            <%= link_to "Delete", [@idea, review], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" %>  
+          <% end %>
+          <br>
         </p>
       <% end %>
     </div>

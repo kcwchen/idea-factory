@@ -35,7 +35,7 @@ class Ability
     end
 
     can(:crud, Review) do |review|
-      user = review.user
+      user == review.user || user == review.idea.user
     end
   end
 end
