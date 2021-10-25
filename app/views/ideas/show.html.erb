@@ -2,12 +2,23 @@
   <div class="card border-0">
     <div class="card-body">
       <h1><%= @idea.title %></h1>
-      <p class="card-text"><%= @idea.description %></p>
       <p class="card-text">Created by <%= @idea.user.full_name %></p>
+      <p class="card-text"><%= @idea.description %></p>
       <% if can?(:crud, @idea) %>
         <%= link_to "Edit", edit_idea_path(@idea.id), class: "btn btn-warning" %>
         <%= link_to "Delete", idea_path(@idea.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
       <% end %>
     </div>
+    <% @reviews.each do |review| %>
+      <div class="card border-0 mt-3">
+        <div class="card-body">
+          <p class="card-text">
+            <%= review.body %>
+            <br>
+            <small>Reviewed <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.first_name %></small>
+          </p>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
