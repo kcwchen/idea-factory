@@ -37,5 +37,13 @@ class Ability
     can(:crud, Review) do |review|
       user == review.user || user == review.idea.user
     end
+
+    can(:like, Idea) do |idea|
+      user.persisted? && idea.user != user
+    end
+
+    can(:destroy, Like) do |like|
+      user == like.user
+    end
   end
 end
