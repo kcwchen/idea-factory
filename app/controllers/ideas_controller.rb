@@ -8,6 +8,7 @@ class IdeasController < ApplicationController
 
   def show
     @reviews = @idea.reviews.order(created_at: :desc)
+    @review = Review.new
   end
 
   def new

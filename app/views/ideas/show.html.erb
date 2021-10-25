@@ -9,16 +9,30 @@
         <%= link_to "Delete", idea_path(@idea.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
       <% end %>
     </div>
-    <% @reviews.each do |review| %>
-      <div class="card border-0 mt-3">
-        <div class="card-body">
-          <p class="card-text">
-            <%= review.body %>
-            <br>
-            <small>Reviewed <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.first_name %></small>
-          </p>
-        </div>
-      </div>
-    <% end %>
   </div>
+  <div class="card border-right-0 border-left-0 border-bottom-0">
+    <div class="card-body">
+      <% @reviews.each do |review| %>
+        <p class="card-text">
+          <%= review.body %>
+          <br>
+          <small>Reviewed <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.first_name %></small>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <%= form_with model: [@idea, @review] do |f| %>
+    <div class="card border-0">
+      <div class="card-body">
+        <h3 class="card-title">Review</h3>
+        <div class="mb-3">
+          <%= f.text_area :body, cols: 50, rows: 3, class: "form-control" %>
+        </div>
+        <%= f.submit "Submit", class: "btn btn-outline-primary" %>
+      </div>
+    </div>
+  <% end %>
 </div>
