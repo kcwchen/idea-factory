@@ -15,7 +15,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(params.require(:idea).permit(:title, :description))
     if @idea.save
-      redirect_to idea_path(@idea)
+      redirect_to idea_path(@idea), notice: "Idea Created"
     else
       render :new
     end
@@ -24,14 +24,19 @@ class IdeasController < ApplicationController
   def destroy
     @idea = Idea.find params[:id]
     @idea.destroy
-    redirect_to ideas_path
+    redirect_to ideas_path, notice: "Idea Deleted"
   end
 
   def edit
     @idea = Idea.find params[:id]
   end
 
-  def update 
-
+  def update
+    @idea = Idea.find params[:id]
+    if @idea.update(params.require(:idea).permit(:title, :description))
+      redirect_to idea_path(@idea), notice: "Idea Updated"
+    else
+      render :edit
+    end
   end
 end

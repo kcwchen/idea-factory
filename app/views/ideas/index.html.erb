@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <% @ideas.each do |idea| %>
-    <div class="card mb-3 border-right-0 border-left-0 border-top-0">
+    <div class="card border-right-0 border-left-0 border-top-0">
       <div class="card-body">
         <h3 class="card-title"><%= link_to idea.title, idea_path(idea.id) %></h3>
         <p class="card-text"><%= idea.description %></p>
