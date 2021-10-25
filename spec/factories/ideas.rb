@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :idea do
-    title { Faker::Hacker.say_something_smart }
+    sequence(:title) {|n| Faker::Hacker.say_something_smart + "#{n}" }
     description { Faker::Lorem.paragraph }
+    association(:user, factory: :user)
   end
 end
