@@ -17,7 +17,7 @@
         <div class="navbar-nav">
           <%= link_to "New Idea", new_idea_path, class: "nav-item nav-link" %>
           <% if user_signed_in? %>
-            <%= link_to current_user.full_name, edit_user_path(current_user.id), class: "nav-item nav-link" %>
+            <a class="nav-item nav-link disabled">Hello <%= current_user.full_name %></a>
             <%= link_to "Sign Out", session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" }, class: "nav-item nav-link text-primary" %>
           <% else %>
             <%= link_to "Sign In", new_session_path, class: "nav-item nav-link text-primary" %>
@@ -26,7 +26,7 @@
         </div>
       </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container">
       <% if flash[:notice] %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <%= flash[:notice] %>
