@@ -2,13 +2,23 @@ require 'rails_helper'
 
 RSpec.describe IdeasController, type: :controller do
   describe "#new" do
-    it "should render the new template" do
-      get(:new)
-      expect(response).to(render_template(:new))
+    context "user signed in" do
+      before do
+        session[:user_id] = FactoryBot.create(:user).id
+        get(:new)
+      end
+      it "should render the new template" do
+        expect(response).to(render_template(:new))
+      end
+      it "should assign instance variable @idea" do
+        expect(assigns(:idea)).to(be_a_new(Idea))
+      end
     end
-    it "should assign instance variable @idea" do
-      get(:new)
-      expect(assigns(:idea)).to(be_a_new(Idea))
+    context "user not signed in" do
+      it "should redirect to sign in page" do
+        get(:new)
+        expect(response).to(redirect_to(new_session_path))
+      end
     end
   end
 
