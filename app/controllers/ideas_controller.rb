@@ -28,7 +28,7 @@ class IdeasController < ApplicationController
   end
 
   def edit
-
+    @idea = Idea.find params[:id]
   end
 
   def update 
