@@ -16,6 +16,16 @@ class LikesController < ApplicationController
   end
 
   def destroy
-
+    like = Like.find params[:id]
+    if can?(:destroy, like)
+      if like.destroy
+        flash[:notice] = "Idea Unliked"
+      else
+        flash[:alert] = like.errors.full_messages.join(", ")
+      end
+    else 
+      flash[:alert] = "You can't unlike an idea you didn't like"
+    end
+    redirect_to root_path
   end
 end
