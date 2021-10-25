@@ -16,7 +16,11 @@
         <p class="card-text">
           <%= review.body %>
           <br>
-          <small>Reviewed <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.first_name %></small>
+          <small>
+            Reviewed <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.first_name %>
+            &#183;
+            <%= link_to "Delete", [@idea, review], method: :delete, data: { confirm: "Are you sure?" } %>  
+          </small>
         </p>
       <% end %>
     </div>
