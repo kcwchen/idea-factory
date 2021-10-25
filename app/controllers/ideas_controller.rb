@@ -1,5 +1,13 @@
 class IdeasController < ApplicationController
 
+  def index
+    @ideas = Idea.all.order(created_at: :desc)
+  end
+
+  def show
+    @idea = Idea.find params[:id]
+  end
+
   def new
     @idea = Idea.new
   end
@@ -13,7 +21,15 @@ class IdeasController < ApplicationController
     end
   end
 
-  def show
+  def destroy
+
+  end
+
+  def edit
+
+  end
+
+  def update 
 
   end
 end
