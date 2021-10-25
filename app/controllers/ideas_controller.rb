@@ -24,11 +24,20 @@ class IdeasController < ApplicationController
   end
 
   def destroy
-    @idea.destroy
-    redirect_to ideas_path, notice: "Idea Deleted"
+    if can?(:crud, @idea)
+      @idea.destroy
+      redirect_to ideas_path, notice: "Idea Deleted"
+    else
+      redirect_to root_path, alert: "Not Authorized"
+    end
   end
 
   def edit
+    if can?(:crud, @idea)
+      render :edit
+    else
+      redirect_to idea_path, alert: "Not Authorized"
+    end
   end
 
   def update
