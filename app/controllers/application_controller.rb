@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
   helper_method :user_signed_in?
+
+  def authenticate_user!
+    redirect_to new_session_path, alert: "Please Sign In" unless user_signed_in?
+  end
 end
