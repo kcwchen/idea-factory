@@ -4,8 +4,10 @@
       <h1><%= @idea.title %></h1>
       <p class="card-text"><%= @idea.description %></p>
       <p class="card-text">Created by <%= @idea.user.full_name %></p>
-      <%= link_to "Edit", edit_idea_path(@idea.id), class: "btn btn-warning" %>
-      <%= link_to "Delete", idea_path(@idea.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      <% if can?(:crud, @idea) %>
+        <%= link_to "Edit", edit_idea_path(@idea.id), class: "btn btn-warning" %>
+        <%= link_to "Delete", idea_path(@idea.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      <% end %>
     </div>
   </div>
 </div>
