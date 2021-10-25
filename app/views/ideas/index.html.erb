@@ -4,7 +4,16 @@
       <div class="card-body">
         <h3 class="card-title"><%= link_to idea.title, idea_path(idea.id), class: "text-decoration-none text-dark" %></h3>
         <p class="card-text"><%= idea.description %></p>
-        <p class="card-text text-primary">By <%= idea.user.first_name %></p>
+        <div>
+          <span class="card-text text-primary">By <%= idea.user.first_name %></span>
+          <% if can?(:like, idea) %>
+            <% if idea.likes.find_by(user: current_user).present? %>
+              <%= link_to "Liked", like_path(idea.likes.find_by(user: current_user)), method: :delete, class: "btn btn-primary" %>
+            <% else %>
+              <%= link_to "Like", idea_likes_path(idea), method: :post, class: "btn btn-outline-primary" %>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
