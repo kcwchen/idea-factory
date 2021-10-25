@@ -11,6 +11,14 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+      <div class="container-fluid">
+        <%= link_to "Idea Factory", root_path, class: "navbar-brand" %>
+        <div class="navbar-nav">
+          <%= link_to "New Idea", new_idea_path, class: "nav-item nav-link" %>
+        </div>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
