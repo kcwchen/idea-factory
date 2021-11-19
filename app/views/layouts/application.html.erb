@@ -11,6 +11,38 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+      <div class="container-fluid">
+        <%= link_to "Idea Factory", root_path, class: "navbar-brand" %>
+        <div class="navbar-nav">
+          <%= link_to "New Idea", new_idea_path, class: "nav-item nav-link" %>
+          <% if user_signed_in? %>
+            <a class="nav-item nav-link disabled">Hello <%= current_user.full_name %></a>
+            <%= link_to "Sign Out", session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" }, class: "nav-item nav-link text-primary" %>
+          <% else %>
+            <%= link_to "Sign In", new_session_path, class: "nav-item nav-link text-primary" %>
+            <%= link_to "Sign Up", new_user_path, class: "nav-item nav-link text-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <% if flash[:notice] %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= flash[:notice] %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= flash[:alert] %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end%>
+    </div>
     <%= yield %>
   </body>
 </html>

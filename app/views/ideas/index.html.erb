@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <% @ideas.each do |idea| %>
+    <div class="card border-right-0 border-left-0 border-top-0">
+      <div class="card-body">
+        <h3 class="card-title"><%= link_to idea.title, idea_path(idea.id), class: "text-decoration-none text-dark" %></h3>
+        <p class="card-text"><%= idea.description %></p>
+        <div class="d-flex flex-row justify-content-between">
+          <div>
+            <span class="card-text text-primary pr-3">By <%= idea.user.first_name %></span>
+            <% if can?(:like, idea) %>
+              <% if idea.likes.find_by(user: current_user).present? %>
+                <%= link_to "Liked", like_path(idea.likes.find_by(user: current_user)), method: :delete, class: "btn btn-primary" %>
+              <% else %>
+                <%= link_to "Like", idea_likes_path(idea), method: :post, class: "btn btn-outline-primary" %>
+              <% end %>
+            <% end %>
+          </div>
+          <div>Likes: <%= idea.likes.count %></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
